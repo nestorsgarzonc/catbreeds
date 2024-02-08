@@ -101,7 +101,8 @@ final class ApiHandlerImpl implements ApiHandler {
   }
 
   @override
-  Uri getUri(String path) => Uri.parse('${ApiConstants.baseUrl}$path');
+  Uri getUri(String path) =>
+      Uri.parse('${ApiConstants.baseUrl}$path?api_key=${ApiConstants.apiKey}');
 
   @override
   List<int> processBody(Map<String, dynamic> body) => utf8.encode(json.encode(body));

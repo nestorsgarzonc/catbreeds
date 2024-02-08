@@ -1,42 +1,47 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:catbreeds/features/home/models/cat_model.dart';
-import 'package:flutter/foundation.dart';
 
 class CatState {
-  const CatState({required this.cats, required this.isLoading, required this.error});
+  const CatState({
+    required this.cats,
+    this.filter,
+  });
 
   factory CatState.initial() {
-    return const CatState(
-      cats: [],
-      isLoading: false,
-      error: null,
-    );
+    return const CatState(cats: AsyncValue.loading());
   }
 
-  final List<CatModel> cats;
-  final bool isLoading;
-  final String? error;
+  final AsyncValue<List<CatModel>> cats;
+  final String? filter;
+
+  List<CatModel> get filteredCats {
+    if (cats.value == null) return [];
+    if (filter == null) return cats.value ?? [];
+    return (cats.value ?? [])
+        .where((cat) => cat.name.toLowerCase().contains(filter!.toLowerCase()))
+        .toList();
+  }
 
   CatState copyWith({
-    List<CatModel>? cats,
-    bool? isLoading,
-    String? error,
+    AsyncValue<List<CatModel>>? cats,
+    String? filter,
   }) {
     return CatState(
       cats: cats ?? this.cats,
-      isLoading: isLoading ?? this.isLoading,
-      error: error ?? this.error,
+      filter: filter ?? this.filter,
     );
   }
 
   @override
-  bool operator ==(Object other) {
+  String toString() => 'CatState(cats: $cats, filter: $filter)';
+
+  @override
+  bool operator ==(covariant CatState other) {
     if (identical(this, other)) return true;
-    return other is CatState &&
-        listEquals(other.cats, cats) &&
-        other.isLoading == isLoading &&
-        other.error == error;
+
+    return other.cats == cats && other.filter == filter;
   }
 
   @override
-  int get hashCode => cats.hashCode ^ isLoading.hashCode ^ error.hashCode;
+  int get hashCode => cats.hashCode ^ filter.hashCode;
 }

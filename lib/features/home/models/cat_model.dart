@@ -36,7 +36,7 @@ class CatModel {
     required this.shortLegs,
     required this.wikipediaUrl,
     required this.hypoallergenic,
-    required this.referenceImageId,
+    required this.img,
     required this.catFriendly,
     required this.bidability,
   });
@@ -49,15 +49,15 @@ class CatModel {
   final String? vcahospitalsUrl;
   final String temperament;
   final String origin;
-  final String countryCodes;
-  final String countryCode;
+  final String? countryCodes;
+  final String? countryCode;
   final String description;
-  final String lifeSpan;
+  final String? lifeSpan;
   final int indoor;
   final int? lap;
   final String? altNames;
   final int adaptability;
-  final int affectionLevel;
+  final int? affectionLevel;
   final int childFriendly;
   final int dogFriendly;
   final int energyLevel;
@@ -77,7 +77,7 @@ class CatModel {
   final int shortLegs;
   final String? wikipediaUrl;
   final int hypoallergenic;
-  final String? referenceImageId;
+  final String? img;
   final int? catFriendly;
   final int? bidability;
 
@@ -87,40 +87,40 @@ class CatModel {
       name: map['name'],
       weight: map['weight']?['metric'],
       cfaUrl: map['cfaUrl'],
-      vetstreetUrl: map['vetstreetUrl'],
-      vcahospitalsUrl: map['vcahospitalsUrl'],
+      vetstreetUrl: map['vetstreet_url'],
+      vcahospitalsUrl: map['vcahospitals_url'],
       temperament: map['temperament'],
       origin: map['origin'],
-      countryCodes: map['countryCodes'],
-      countryCode: map['countryCode'],
+      countryCodes: map['country_codes'],
+      countryCode: map['country_code'],
       description: map['description'],
-      lifeSpan: map['lifeSpan'],
+      lifeSpan: map['life_span'],
       indoor: map['indoor'],
       lap: map['lap'],
-      altNames: map['altNames'],
+      altNames: map['alt_names'],
       adaptability: map['adaptability'],
-      affectionLevel: map['affectionLevel'],
-      childFriendly: map['childFriendly'],
-      dogFriendly: map['dogFriendly'],
-      energyLevel: map['energyLevel'],
+      affectionLevel: map['affection_level'],
+      childFriendly: map['child_friendly'],
+      dogFriendly: map['dog_friendly'],
+      energyLevel: map['energy_level'],
       grooming: map['grooming'],
-      healthIssues: map['healthIssues'],
+      healthIssues: map['health_issues'],
       intelligence: map['intelligence'],
-      sheddingLevel: map['sheddingLevel'],
-      socialNeeds: map['socialNeeds'],
-      strangerFriendly: map['strangerFriendly'],
+      sheddingLevel: map['shedding_level'],
+      socialNeeds: map['social_needs'],
+      strangerFriendly: map['stranger_friendly'],
       vocalisation: map['vocalisation'],
       experimental: map['experimental'],
       hairless: map['hairless'],
       natural: map['natural'],
       rare: map['rare'],
       rex: map['rex'],
-      suppressedTail: map['suppressedTail'],
-      shortLegs: map['shortLegs'],
-      wikipediaUrl: map['wikipediaUrl'],
+      suppressedTail: map['suppressed_tail'],
+      shortLegs: map['short_legs'],
+      wikipediaUrl: map['wikipedia_url'],
       hypoallergenic: map['hypoallergenic'],
-      referenceImageId: map['referenceImageId'],
-      catFriendly: map['catFriendly'],
+      img: map['image']?['url'],
+      catFriendly: map['cat_friendly'],
       bidability: map['bidability'],
     );
   }
@@ -164,7 +164,7 @@ class CatModel {
         other.shortLegs == shortLegs &&
         other.wikipediaUrl == wikipediaUrl &&
         other.hypoallergenic == hypoallergenic &&
-        other.referenceImageId == referenceImageId &&
+        other.img == img &&
         other.catFriendly == catFriendly &&
         other.bidability == bidability;
   }
@@ -207,7 +207,7 @@ class CatModel {
         shortLegs.hashCode ^
         wikipediaUrl.hashCode ^
         hypoallergenic.hashCode ^
-        referenceImageId.hashCode ^
+        img.hashCode ^
         catFriendly.hashCode ^
         bidability.hashCode;
   }
